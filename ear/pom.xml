@@ -59,7 +59,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <my-tomeeHost>localtomee</my-tomeeHost>
+                <my-tomeeHost>enapp-was125.el.eee.intern</my-tomeeHost>
             </properties>
         </profile>
         <profile>
