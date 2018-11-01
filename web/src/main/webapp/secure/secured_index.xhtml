@@ -5,18 +5,46 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/resources/templates/template.xhtml">
     <ui:define name="content">
-        <h1>Luca's music Webshop - Logged in</h1>
+        <h1 style="margin-bottom: 2em;">Luca's music Webshop - Logged in as #{userSessionJSF.username}</h1>
+
+        <h:column>
+            <h:outputText value="Songname" style="margin: 2em 8.3em 0em 0em;"/>
+        </h:column>
+        <h:column>
+            <h:outputText value="Interpret" style="padding-right:9em;"/>
+        </h:column>
+        <h:column>
+            <h:outputText value="Price" style="padding-right:4em;"/>
+        </h:column>
 
         <h:dataTable id="mp3_table" var="singleMp3" value="#{productJSF.products}">
             <h:column>
-                <h:outputText value="#{singleMp3.name} " style="padding-right:4em;"/>
-
-
+                <h:outputText value="#{singleMp3.name} " style="padding:2em 4em 0em 0em;"/>
             </h:column>
             <h:column>
-                <h:outputText value="#{singleMp3.description} "/>
-
+                <h:outputText value="#{singleMp3.description} " style="padding-right:4em;"/>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{singleMp3.unitprice} " style="padding-right:4em;"/>
+            </h:column>
+            <h:column>
+                <h:button action="#{userSessionJSF.logout}" value="Add to Cart"/>
             </h:column>
         </h:dataTable>
+
+    <h1 style="margin-top:2em;">Warenkorb</h1>
+
+        <h:dataTable id="mp3_basket" var="basketMp3" value="#{basketJSF.products}">
+            <h:column>
+                <h:outputText value="#{basketMp3.name} " style="padding:2em 4em 0em 0em;"/>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{basketMp3.description} " style="padding-right:4em;"/>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{basketMp3.unitprice} " style="padding-right:4em;"/>
+            </h:column>
+        </h:dataTable>
+
     </ui:define>
 </ui:composition>

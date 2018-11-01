@@ -12,7 +12,10 @@ import java.util.List;
 
 @Named
 @RequestScoped
-public class ProductJSF {
+public class BasketJSF {
+
+
+
     public String getMessage() {
         return "Hello from Backing Bean";
     }
