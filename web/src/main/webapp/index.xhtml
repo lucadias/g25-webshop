@@ -1,24 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Created by IntelliJ IDEA.
-  User: luca_
-  Date: 31.10.2018
-  Time: 10:37
--->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/templates/template.xhtml">
+    <ui:define name="content">
+        <h1>Luca's music Webshop</h1>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+        <h:dataTable id="mp3_table" var="singleMp3" value="#{productJSF.products}">
+            <h:column>
+                <h:outputText value="#{singleMp3.name} "/>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+</ui:composition>
 
-<h:head>
-    <title>Title</title>
-</h:head>
-
-<h:body>
-    <h1>Hello from JSF</h1>
-    
-</h:body>
-
-</html>

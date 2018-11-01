@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless(name = "ProductServicesEJB")
@@ -33,6 +34,26 @@ public class ProductServicesBean implements ProductServicesBeanLocal {
 
 
         return  productReturn;
+    }
+
+    public List<Product> getProducts() throws Exception {
+        final List<Product> productsReturn = new ArrayList<>();
+        final TypedQuery<ProductEntity> query = em.createNamedQuery("getProduct", ProductEntity.class);
+
+        for (final ProductEntity productEntity : query.getResultList()) {
+
+            final Product product = new Product();
+            product.setName(productEntity.getName());
+            product.setDescription(productEntity.getDescription());
+            product.setMediapath(productEntity.getMediapath());
+            product.setUnitprice(productEntity.getUnitprice());
+            product.setId(productEntity.getId());
+
+            productsReturn.add(product);
+        }
+
+
+        return productsReturn;
     }
 
 }
