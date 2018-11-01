@@ -1,45 +1,38 @@
 package ch.hslu.enapp.webshop.jsf;
 
-import ch.hslu.enapp.webshop.ProductsBeanLocal;
 import ch.hslu.enapp.webshop.dto.Product;
-import ch.hslu.enapp.webshop.services.ProductServicesBeanLocal;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import java.util.Collections;
-import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 @Named
-@RequestScoped
-public class BasketJSF {
+@SessionScoped
+public class BasketJSF implements Serializable {
+    private static final long serialVersionUID = 1492259801008765071L;
 
 
 
-    public String getMessage() {
-        return "Hello from Backing Bean";
+    private ArrayList<Product> basket = new ArrayList<Product>();
+
+
+
+
+    public void addToBasket(Product product){
+        LogManager.getLogger(BasketJSF.class).log(Level.DEBUG,"Added Item to BaLsket " +product.getName());
+       basket.add(product);
+   //    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("basketput",basket);
+      //  basketServices.addtoBasket(product);
     }
 
-    @Inject
-    private ProductsBeanLocal myBean;
+    public ArrayList<Product> getBasketitems(){
+        LogManager.getLogger(BasketJSF.class).log(Level.DEBUG,"Returned Basket " +this.basket.size());
 
-    @Inject
-    private ProductServicesBeanLocal productServices;
-
-    public String getProductsFromEJB() throws Exception {
-        return myBean.getProducts();
+        return this.basket;
     }
-
-    public String getFirstProductName() throws Exception {
-        return productServices.getFirstProduct().getName();
-    }
-
-    public List<Product> getProducts() throws  Exception{
-        List<Product> products = productServices.getProducts();
-
-        return products;
-    }
-
 
 
 }
