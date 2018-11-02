@@ -63,8 +63,9 @@
                 </h:column>
             </h:dataTable>
 
-            <h:commandButton action="#{checkoutJSF.checkout(basketJSF.basketitems,userSessionJSF.username)}" value="Checkout" style="float:right;">
-            <f:actionListener binding="#{basketJSF.resetBasket()}" />
+            <h:commandButton value="Checkout" style="float:right;">
+                <f:actionListener binding="#{checkoutJSF.checkout(basketJSF.basketitems,userSessionJSF.username)}" />
+                <f:actionListener binding="#{basketJSF.resetBasket()}" />
             </h:commandButton>
 
         </h:form>

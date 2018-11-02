@@ -16,7 +16,7 @@ public class BasketJSF implements Serializable {
 
 
 
-    private ArrayList<Product> basket = new ArrayList<Product>();
+    static private ArrayList<Product> basket = new ArrayList<Product>();
 
 
 
@@ -35,7 +35,8 @@ public class BasketJSF implements Serializable {
     }
 
 
-    public void resetBasket() {
+    public void resetBasket() throws InterruptedException {
+        //wait(100);
         basket.clear();
     }
 }

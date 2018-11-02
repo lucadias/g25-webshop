@@ -18,14 +18,14 @@ public class CheckoutJSF {
     @Inject
     private CheckoutServicesBeanLocal checkoutbean;
 
-    private BasketJSF basketjsf = new BasketJSF();
+ //   private BasketJSF basketjsf = new BasketJSF();
 
 
 
     public void checkout(List<Product> basket, String customername){
 
         checkoutbean.checkout(basket, customername);
-        basketjsf.resetBasket();
+
     }
 
 
