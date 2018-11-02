@@ -28,6 +28,12 @@ public class BasketJSF implements Serializable {
       //  basketServices.addtoBasket(product);
     }
 
+    public void removefromBasket(Product product){
+        basket.remove(product);
+        //    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("basketput",basket);
+        //  basketServices.addtoBasket(product);
+    }
+
     public ArrayList<Product> getBasketitems(){
         LogManager.getLogger(BasketJSF.class).log(Level.DEBUG,"Returned Basket " +this.basket.size());
 

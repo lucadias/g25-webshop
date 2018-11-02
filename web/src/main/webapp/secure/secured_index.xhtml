@@ -5,62 +5,60 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/resources/templates/template.xhtml">
     <ui:define name="content">
-        <h:form>
+
         <h1 style="margin-bottom: 2em;">Luca's music Webshop - Logged in as #{userSessionJSF.username}</h1>
+        <h:form id="addToBasketForm">
 
-        <h:column>
-            <h:outputText value="Songname" style="font-weight: bold;margin: 2em 8.2em 0em 0em;"/>
-        </h:column>
-        <h:column>
-            <h:outputText value="Interpret" style="font-weight: bold;padding-right:8.6em;"/>
-        </h:column>
-        <h:column>
-            <h:outputText value="Price" style="font-weight: bold;padding-right:4em;"/>
-        </h:column>
-
-
-        <h:dataTable id="mp3_table" var="singleMp3" value="#{productJSF.products}">
-            <h:column>
-                <h:outputText value="#{singleMp3.name} " style="padding:2em 4em 0em 0em;"/>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{singleMp3.description} " style="padding-right:4em;"/>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{singleMp3.unitprice} chf" style="padding-right:4em;"/>
-            </h:column>
-
-            <h:column>
-
-                <h:commandButton action="#{basketJSF.addToBasket(singleMp3)}" value="Add to Basket"/>
-
-
-            </h:column>
-        </h:dataTable>
-
-    <h1 style="margin-top:2em;">Warenkorb</h1>
-
-
-            <h:column>
-                <h:outputText value="Songname" style="font-weight: bold;margin: 2em 8.2em 0em 0em;"/>
-            </h:column>
-            <h:column>
-                <h:outputText value="Interpret" style="font-weight: bold;padding-right:8.6em;"/>
-            </h:column>
-            <h:column>
-                <h:outputText value="Price" style="font-weight: bold;padding-right:4em;"/>
-            </h:column>
-
-            <h:dataTable id="mp3_basket" var="basketMp3" value="#{basketJSF.basketitems}">
+            <h:dataTable id="mp3_table" var="singleMp3" value="#{productJSF.products}" style="text-align:left;width: 40em;">
                 <h:column>
-                    <h:outputText value="#{basketMp3.name} " style="padding:2em 4em 0em 0em;"/>
+                    <!-- column header -->
+                    <f:facet name="header">Songname</f:facet>
+                    <!-- row record -->
+                    #{singleMp3.name}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    #{singleMp3.description}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    #{singleMp3.unitprice}
                 </h:column>
                 <h:column>
-                    <h:outputText value="#{basketMp3.description} " style="padding-right:4em;"/>
+                    <h:commandButton actionListener="#{basketJSF.addToBasket(singleMp3)}" value="Add to Basket">
+                        <f:ajax execute="addToBasketForm" render="addToBasketForm mp3_basket"     />
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+
+            <h1 style="margin-top:2em;margin-bottom: 2em;">Warenkorb</h1>
+
+            <h:dataTable id="mp3_basket" var="basketMp3" value="#{basketJSF.basketitems}" style="text-align:left;width: 40em;">
+                <h:column>
+                    <!-- column header -->
+                    <f:facet name="header">Songname</f:facet>
+                    <!-- row record -->
+                    #{basketMp3.name}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    #{basketMp3.description}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    #{basketMp3.unitprice} chf
                 </h:column>
                 <h:column>
-                    <h:outputText value="#{basketMp3.unitprice} " style="padding-right:4em;"/>
+                    <h:commandButton actionListener="#{basketJSF.removefromBasket(basketMp3)}" value="Remove">
+                        <f:ajax execute="addToBasketForm" render="addToBasketForm mp3_basket"     />
+                    </h:commandButton>
                 </h:column>
+
+
             </h:dataTable>
 
             <h:commandButton value="Checkout" style="float:right;">
