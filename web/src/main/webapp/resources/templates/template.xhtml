@@ -34,6 +34,10 @@
                         <li><h:commandLink action="/profile" value="Profile"/></li>
                     </ui:fragment>
 
+                    <ui:fragment rendered="#{userSessionJSF.username ne null and userSessionJSF.username ne ''}">
+                        <li><h:commandLink action="/purchases" value="Purchase"/></li>
+                    </ui:fragment>
+
                     <ui:fragment rendered="#{userSessionJSF.isAdmin == true}">
                         <li><h:commandLink action="/admin/admin_index" value="Admin"/></li>
                     </ui:fragment>
