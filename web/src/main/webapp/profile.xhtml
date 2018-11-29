@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/templates/template.xhtml">
+    <ui:define name="content">
+
+        <h1 style="margin-bottom: 2em;">Luca's music Webshop - Logged in as #{userSessionJSF.username}</h1>
+        <h3 style="margin-bottom: 2em;">Ändern Sie hier ihre Profildaten!</h3>
+        <h:form id="editprofile_form" acceptcharset="UTF-8" enctype="application/x-www-form-urlencoded;charset=UTF-8">
+            <table>
+                <tr>
+                    <td><h:outputLabel value="Fistname:" for="firstname" /></td>
+                    <td><h:inputText size="35" id="firstname" value="#{customerJSF.customer.firstname}"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel value="Lastname:" for="lastname" /></td>
+                    <td><h:inputText size="35" id="lastname" value="#{customerJSF.customer.lastname}"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel value="E-Mail:" for="email" /></td>
+                    <td><h:inputText size="35" id="email" value="#{customerJSF.customer.email}"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel value="Address:" for="address" /></td>
+                    <td><h:inputText size="35" id="address" value="#{customerJSF.customer.address}"/></td>
+                </tr>
+                <tr>
+                    <td><h:commandButton id="editprofil" action="#{customerJSF.updateCustomer}" value="Speichern" /></td>
+                </tr>
+            </table>
+        </h:form>
+    </ui:define>
+</ui:composition>

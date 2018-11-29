@@ -5,6 +5,11 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "getCustomerByName", query = "SELECT c FROM CustomerEntity c WHERE c.name = :name"),
+        @NamedQuery(name = "getAllCustomers", query = "SELECT c FROM CustomerEntity c")
+
+})
 @Table(name = "customer", schema = "webshop", catalog = "")
 public class CustomerEntity {
     private String name;

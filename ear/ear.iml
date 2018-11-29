@@ -20,6 +20,7 @@
     <orderEntry type="module" module-name="common" />
     <orderEntry type="module" module-name="data" />
     <orderEntry type="module" module-name="ejb" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:20.0" level="project" />
     <orderEntry type="module" module-name="web" />
     <orderEntry type="module" module-name="rest" />
     <orderEntry type="module" module-name="soap" />

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/templates/template.xhtml">
+    <ui:define name="content">
+
+        <h1 style="margin-bottom: 2em;">Luca's music Webshop - Register</h1>
+
+
+        <h:form id="register_form" acceptcharset="UTF-8" enctype="application/x-www-form-urlencoded;charset=UTF-8">
+
+            <table>
+                <tr>
+                    <td><h:outputLabel value="Username:" for="username" /></td>
+                    <td><h:inputText size="35" id="username" value="#{registerJSF.customer.name}"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel value="Password:" for="password" /></td>
+                    <td><h:inputText size="35" id="password" value="#{registerJSF.customer.password}"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel value="Fistname:" for="firstname" /></td>
+                    <td><h:inputText size="35" id="firstname" value="#{registerJSF.customer.firstname}"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel value="Lastname:" for="lastname" /></td>
+                    <td><h:inputText size="35" id="lastname" value="#{registerJSF.customer.lastname}"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel value="E-Mail:" for="email" /></td>
+                    <td><h:inputText size="35" id="email" value="#{registerJSF.customer.email}"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel value="Address:" for="address" /></td>
+                    <td><h:inputText size="35" id="address" value="#{registerJSF.customer.address}"/></td>
+                </tr>
+                <tr>
+                    <td><h:commandButton id="register" action="#{registerJSF.registerNewCustomer}" value="Register" />
+                    </td>
+                </tr>
+            </table>
+
+            <br></br>
+
+
+
+
+
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>

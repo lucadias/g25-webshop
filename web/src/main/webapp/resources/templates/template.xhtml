@@ -31,8 +31,23 @@
                     </ui:fragment>
 
                     <ui:fragment rendered="#{userSessionJSF.username ne null and userSessionJSF.username ne ''}">
+                        <li><h:commandLink action="/profile" value="Profile"/></li>
+                    </ui:fragment>
+
+                    <ui:fragment rendered="#{userSessionJSF.isAdmin == true}">
+                        <li><h:commandLink action="/admin/admin_index" value="Admin"/></li>
+                    </ui:fragment>
+
+
+                    <ui:fragment rendered="#{userSessionJSF.username ne null and userSessionJSF.username ne ''}">
                         <li><h:commandLink action="#{userSessionJSF.logout}" value="Logout"/></li>
                     </ui:fragment>
+
+                    <ui:fragment rendered="#{userSessionJSF.username == null or userSessionJSF.username == ''}">
+                        <li><h:commandLink action="/register" value="Register"/></li>
+                    </ui:fragment>
+
+
                 </ul>
             </h:form>
         </div>

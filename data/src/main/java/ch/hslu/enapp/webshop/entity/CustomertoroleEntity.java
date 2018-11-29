@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+
+@NamedQueries({
+        @NamedQuery(name = "getCustomerToRoleByCustomerName", query = "SELECT a FROM CustomertoroleEntity a WHERE a.name = :Customername")
+})
 @Table(name = "customertorole", schema = "webshop", catalog = "")
 @IdClass(CustomertoroleEntityPK.class)
 public class CustomertoroleEntity {

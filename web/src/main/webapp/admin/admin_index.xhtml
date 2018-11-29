@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/templates/template.xhtml">
+    <ui:define name="content">
+
+        <h1 style="margin-bottom: 2em;">Luca's music Webshop - Logged in as #{userSessionJSF.username}</h1>
+        <h3 style="margin-bottom: 2em;">Ändern Sie hier alle Profildaten!</h3>
+        <h:form id="editprofile_form" acceptcharset="UTF-8" enctype="application/x-www-form-urlencoded;charset=UTF-8">
+
+            <h:dataTable id="customer" var="singleCustomer" value="#{customerJSF.allCustomers}" style="text-align:left;width: 40em;">
+                <table>
+                    <h:column>
+                        <tr>
+                            <td><h3>#{singleCustomer.name}</h3></td>
+                            <td></td>
+                        </tr>
+                    </h:column>
+                    <h:column>
+                    <tr>
+                    <td><h:outputLabel value="Fistname:" for="firstname" /></td>
+                    <td><h:inputText size="35" id="firstname" value="#{singleCustomer.firstname}"/></td>
+                    </tr>
+                </h:column>
+
+                <h:column>
+                    <tr>
+                    <td><h:outputLabel value="Lastname:" for="lastname" /></td>
+                    <td><h:inputText size="35" id="lastname" value="#{singleCustomer.lastname}"/></td>
+                    </tr>
+                </h:column>
+
+                <h:column>
+                    <tr>
+                    <td><h:outputLabel value="E-Mail:" for="email" /></td>
+                    <td><h:inputText size="35" id="email" value="#{singleCustomer.email}"/></td>
+                    </tr>
+                </h:column>
+                <h:column>
+                    <tr>
+                    <td><h:outputLabel value="Address:" for="address" /></td>
+                    <td><h:inputText size="35" id="address" value="#{singleCustomer.address}"/></td>
+                    </tr>
+                </h:column>
+
+                </table>
+
+            </h:dataTable>
+            <tr>
+                <td><h:commandButton id="editprofil" action="#{customerJSF.updateAllCustomers}" value="Speichern" /></td>
+            </tr>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
