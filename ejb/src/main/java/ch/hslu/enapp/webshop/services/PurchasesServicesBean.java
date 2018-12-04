@@ -32,6 +32,7 @@ public class PurchasesServicesBean implements PurchasesServicesBeanLocal {
     public List<Purchase> getAllPurchases() {
 
         List<PurchaseEntity> allPurchasesEntity = em.createNamedQuery("getAllPurchases", PurchaseEntity.class)
+                .setParameter("customer", context.getCallerPrincipal().getName())
                 .getResultList();
 
         ArrayList<Purchase> PurchasesListConverted = new ArrayList<>();

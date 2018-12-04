@@ -5,6 +5,7 @@ import ch.hslu.enapp.webshop.services.CustomerRoleServicesBeanLocal;
 import ch.hslu.enapp.webshop.services.CustomerServicesBeanLocal;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,7 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class CustomerJSF implements Serializable {
     private static final long serialVersionUID = 1492259801008765071L;
 

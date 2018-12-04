@@ -9,6 +9,7 @@ public class Product {
     private String name;
     private String description;
     private String mediapath;
+    private String dynnavnumber;
     private BigDecimal unitprice;
     private Collection<Purchaseitem> purchaseitemsById;
 
@@ -73,5 +74,13 @@ public class Product {
 
     public void setPurchaseitemsById(Collection<Purchaseitem> purchaseitemsById) {
         this.purchaseitemsById = purchaseitemsById;
+    }
+
+    public String getDynnavnumber() {
+        return dynnavnumber;
+    }
+
+    public void setDynnavnumber(String dynnavnumber) {
+        this.dynnavnumber = dynnavnumber;
     }
 }

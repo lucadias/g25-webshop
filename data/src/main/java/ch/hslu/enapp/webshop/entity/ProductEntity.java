@@ -9,7 +9,8 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "getProduct", query = "SELECT u FROM ProductEntity u"),
         @NamedQuery(name = "getProductByName", query = "SELECT u FROM ProductEntity u WHERE u.name = :name"),
-        @NamedQuery(name = "getProductById", query = "SELECT u FROM ProductEntity u WHERE u.id = :id")
+        @NamedQuery(name = "getProductById", query = "SELECT u FROM ProductEntity u WHERE u.id = :id"),
+        @NamedQuery(name = "getProductByDynNavNumber", query = "SELECT u FROM ProductEntity u WHERE u.dynnavnumber = :dynnavnumber")
 })
 
 @Table(name = "product", schema = "webshop", catalog = "")
@@ -18,6 +19,7 @@ public class ProductEntity {
     private String name;
     private String description;
     private String mediapath;
+    private String dynnavnumber;
     private BigDecimal unitprice;
     private Collection<PurchaseitemEntity> purchaseitemsById;
 
@@ -39,6 +41,16 @@ public class ProductEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Basic
+    @Column(name = "dynnavnumber", nullable = false, length = 255)
+    public String getDynnavnumber() {
+        return dynnavnumber;
+    }
+
+    public void setDynnavnumber(String dynnavnumber) {
+        this.dynnavnumber = dynnavnumber;
     }
 
     @Basic
@@ -96,4 +108,6 @@ public class ProductEntity {
     public void setPurchaseitemsById(Collection<PurchaseitemEntity> purchaseitemsById) {
         this.purchaseitemsById = purchaseitemsById;
     }
+
+
 }

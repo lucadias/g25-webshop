@@ -8,7 +8,7 @@ import java.util.Objects;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "getPurchaseByDate", query = "SELECT u FROM PurchaseEntity u ORDER BY u.datetime DESC"),
-        @NamedQuery(name = "getAllPurchases", query = "SELECT c FROM PurchaseEntity c")
+        @NamedQuery(name = "getAllPurchases", query = "SELECT c FROM PurchaseEntity c WHERE c.customer = :customer")
 
 })
 
