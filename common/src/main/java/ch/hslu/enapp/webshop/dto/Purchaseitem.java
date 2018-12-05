@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Purchaseitem {
     private int id;
-    private int purchase;
+    private String purchase;
     private int product;
     private int quantity;
     private Purchase purchaseByPurchase;
@@ -18,11 +18,11 @@ public class Purchaseitem {
         this.id = id;
     }
 
-    public int getPurchase() {
+    public String getPurchase() {
         return purchase;
     }
 
-    public void setPurchase(int purchase) {
+    public void setPurchase(String purchase) {
         this.purchase = purchase;
     }
 

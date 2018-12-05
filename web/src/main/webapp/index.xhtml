@@ -39,19 +39,24 @@
         <h:dataTable id="mp3_basket" var="basketMp3" value="#{basketJSF.basketitems}" style="text-align:left;width: 40em;">
             <h:column>
                 <!-- column header -->
-                <f:facet name="header">Songname</f:facet>
+                <f:facet name="header">Product</f:facet>
                 <!-- row record -->
-                #{basketMp3.name}
+                #{basketMp3.productByProduct.name}
             </h:column>
 
             <h:column>
                 <f:facet name="header">Description</f:facet>
-                #{basketMp3.description}
+                #{basketMp3.productByProduct.description}
             </h:column>
 
             <h:column>
                 <f:facet name="header">Price</f:facet>
-                #{basketMp3.unitprice} chf
+                #{basketMp3.productByProduct.unitprice} chf
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Quantity</f:facet>
+                #{basketMp3.quantity}
             </h:column>
             <h:column>
                 <h:commandButton actionListener="#{basketJSF.removefromBasket(basketMp3)}" value="Remove">

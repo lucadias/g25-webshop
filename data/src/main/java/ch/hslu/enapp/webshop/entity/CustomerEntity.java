@@ -15,6 +15,8 @@ public class CustomerEntity {
     private String name;
     private String password;
     private String firstname;
+
+    private String dynNavCustNo;
     private String lastname;
     private String address;
     private String email;
@@ -39,6 +41,16 @@ public class CustomerEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Basic
+    @Column(name = "dynNavCustNo", nullable = false, length = 255)
+    public String getDynNavCustNo() {
+        return dynNavCustNo;
+    }
+
+    public void setDynNavCustNo(String dynNavCustNo) {
+        this.dynNavCustNo = dynNavCustNo;
     }
 
     @Basic
@@ -116,4 +128,6 @@ public class CustomerEntity {
     public void setPurchasesByName(Collection<PurchaseEntity> purchasesByName) {
         this.purchasesByName = purchasesByName;
     }
+
+
 }

@@ -1,9 +1,12 @@
 package ch.hslu.enapp.webshop.entity;
 
+import ch.hslu.enapp.webshop.dto.Purchase;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @NamedQueries({
@@ -14,20 +17,24 @@ import java.util.Objects;
 
 @Table(name = "purchase", schema = "webshop", catalog = "")
 public class PurchaseEntity {
-    private int id;
+    private String id;
     private String customer;
     private Timestamp datetime;
     private String state;
+    private String payId;
     private CustomerEntity customerByCustomer;
     private Collection<PurchaseitemEntity> purchaseitemsById;
 
+/*    public PurchaseEntity(){
+        this.id = UUID.randomUUID().toString();
+    }*/
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,6 +46,16 @@ public class PurchaseEntity {
 
     public void setCustomer(String customer) {
         this.customer = customer;
+    }
+
+    @Basic
+    @Column(name = "payId", nullable = false, length = 255)
+    public String getPayId() {
+        return payId;
+    }
+
+    public void setPayId(String payId) {
+        this.payId = payId;
     }
 
     @Basic
@@ -95,4 +112,6 @@ public class PurchaseEntity {
     public void setPurchaseitemsById(Collection<PurchaseitemEntity> purchaseitemsById) {
         this.purchaseitemsById = purchaseitemsById;
     }
+
+
 }

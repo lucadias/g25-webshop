@@ -2,6 +2,7 @@ package ch.hslu.enapp.webshop.jsf;
 
 import ch.hslu.enapp.webshop.ProductsBeanLocal;
 import ch.hslu.enapp.webshop.dto.Product;
+import ch.hslu.enapp.webshop.dto.Purchaseitem;
 import ch.hslu.enapp.webshop.services.CheckoutServicesBeanLocal;
 import ch.hslu.enapp.webshop.services.ProductServicesBeanLocal;
 
@@ -22,7 +23,7 @@ public class CheckoutJSF {
 
 
 
-    public void checkout(List<Product> basket, String customername){
+    public void checkout(List<Purchaseitem> basket, String customername){
 
         checkoutbean.checkout(basket, customername);
 

@@ -8,6 +8,7 @@ public class Customer {
     private String password;
     private String firstname;
     private String lastname;
+    private String dynNavCustNo;
     private String address;
     private String email;
     private Collection<Customertorole> customertorolesByName;
@@ -69,12 +70,13 @@ public class Customer {
                 Objects.equals(password, that.password) &&
                 Objects.equals(firstname, that.firstname) &&
                 Objects.equals(lastname, that.lastname) &&
+                Objects.equals(dynNavCustNo, that.dynNavCustNo) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(email, that.email);
     }
 
     public int hashCode() {
-        return Objects.hash(name, password, firstname, lastname, address, email);
+        return Objects.hash(name, password, firstname, lastname, dynNavCustNo, address, email);
     }
 
     public Collection<Customertorole> getCustomertorolesByName() {
@@ -91,5 +93,13 @@ public class Customer {
 
     public void setPurchasesByName(Collection<Purchase> purchasesByName) {
         this.purchasesByName = purchasesByName;
+    }
+
+    public String getDynNavCustNo() {
+        return dynNavCustNo;
+    }
+
+    public void setDynNavCustNo(String dynNavCustNo) {
+        this.dynNavCustNo = dynNavCustNo;
     }
 }

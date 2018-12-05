@@ -1,6 +1,7 @@
 package ch.hslu.enapp.webshop.jsf;
 
 import ch.hslu.enapp.webshop.dto.Product;
+import ch.hslu.enapp.webshop.dto.Purchaseitem;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 
@@ -16,25 +17,44 @@ public class BasketJSF implements Serializable {
 
 
 
-    static private ArrayList<Product> basket = new ArrayList<Product>();
-
-
+    static private ArrayList<Purchaseitem> basket = new ArrayList<Purchaseitem>();
 
 
     public void addToBasket(Product product){
-        LogManager.getLogger(BasketJSF.class).log(Level.DEBUG,"Added Item to BaLsket " +product.getName());
-       basket.add(product);
-   //    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("basketput",basket);
-      //  basketServices.addtoBasket(product);
+//        LogManager.getLogger(BasketJSF.class).log(Level.DEBUG,"Added Item to BaLsket " +product.getName());
+
+        Purchaseitem purchaseitem = new Purchaseitem();
+        purchaseitem.setProduct(product.getId());
+        purchaseitem.setProductByProduct(product);
+        boolean toAdd = false;
+        if(basket.isEmpty()){
+            purchaseitem.setQuantity(1);
+            basket.add(purchaseitem);
+        }else {
+            for(int i = 0; i < basket.size(); i++){
+                if(basket.get(i).getProduct() == product.getId()){
+                    basket.get(i).setQuantity(basket.get(i).getQuantity() + 1);
+                    return;
+                } else {
+                    purchaseitem.setQuantity(1);
+                    toAdd = true;
+                }
+            }
+        }
+        if(toAdd){
+            basket.add(purchaseitem);
+        }
     }
 
-    public void removefromBasket(Product product){
+
+
+
+    public void removefromBasket(Purchaseitem product) {
+
         basket.remove(product);
-        //    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("basketput",basket);
-        //  basketServices.addtoBasket(product);
     }
 
-    public ArrayList<Product> getBasketitems(){
+    public ArrayList<Purchaseitem> getBasketitems(){
         LogManager.getLogger(BasketJSF.class).log(Level.DEBUG,"Returned Basket " +this.basket.size());
 
         return this.basket;

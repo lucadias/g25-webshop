@@ -7,7 +7,7 @@ import java.util.Objects;
 @Table(name = "purchaseitem", schema = "webshop", catalog = "")
 public class PurchaseitemEntity {
     private int id;
-    private int purchase;
+    private String purchase;
     private int product;
     private int quantity;
     private PurchaseEntity purchaseByPurchase;
@@ -25,11 +25,11 @@ public class PurchaseitemEntity {
 
     @Basic
     @Column(name = "purchase", nullable = false)
-    public int getPurchase() {
+    public String getPurchase() {
         return purchase;
     }
 
-    public void setPurchase(int purchase) {
+    public void setPurchase(String purchase) {
         this.purchase = purchase;
     }
 

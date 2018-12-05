@@ -5,18 +5,19 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class Purchase {
-    private int id;
+    private String id;
     private String customer;
     private Timestamp datetime;
     private String state;
+    private String payId;
     private Customer customerByCustomer;
     private Collection<Purchaseitem> purchaseitemsById;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -72,5 +73,13 @@ public class Purchase {
 
     public void setPurchaseitemsById(Collection<Purchaseitem> purchaseitemsById) {
         this.purchaseitemsById = purchaseitemsById;
+    }
+
+    public String getPayId() {
+        return payId;
+    }
+
+    public void setPayId(String payId) {
+        this.payId = payId;
     }
 }

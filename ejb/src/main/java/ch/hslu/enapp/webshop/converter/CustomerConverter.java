@@ -17,6 +17,8 @@ public class CustomerConverter implements Serializable {
         customer.setFirstname(dto.getFirstname());
         customer.setLastname(dto.getLastname());
         customer.setPassword(dto.getPassword());
+
+        customer.setDynNavCustNo(dto.getDynNavCustNo());
         return customer;
     }
 
@@ -28,6 +30,8 @@ public class CustomerConverter implements Serializable {
         customer.setName(entity.getName());
         customer.setFirstname(entity.getFirstname());
         customer.setLastname(entity.getLastname());
+
+        customer.setDynNavCustNo(entity.getDynNavCustNo());
 
         customer.setPassword(entity.getPassword());
         return customer;
