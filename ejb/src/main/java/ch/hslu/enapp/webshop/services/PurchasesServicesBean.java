@@ -31,7 +31,7 @@ public class PurchasesServicesBean implements PurchasesServicesBeanLocal {
     @Override
     public List<Purchase> getAllPurchases() {
 
-        List<PurchaseEntity> allPurchasesEntity = em.createNamedQuery("getAllPurchases", PurchaseEntity.class)
+        List<PurchaseEntity> allPurchasesEntity = em.createNamedQuery("getAllPurchasesByCustomer", PurchaseEntity.class)
                 .setParameter("customer", context.getCallerPrincipal().getName())
                 .getResultList();
 

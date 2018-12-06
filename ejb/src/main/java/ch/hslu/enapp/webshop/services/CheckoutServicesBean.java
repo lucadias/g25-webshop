@@ -22,6 +22,7 @@ import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -75,7 +76,7 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
 
 
         for (final Purchaseitem purchaseitem: basket) {
-            amount += Double.valueOf(String.valueOf(purchaseitem.getProductByProduct().getUnitprice()));
+            amount += Double.valueOf(String.valueOf(purchaseitem.getProductByProduct().getUnitprice().multiply(BigDecimal.valueOf(purchaseitem.getQuantity()))));
         }
 
 
@@ -86,7 +87,7 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
 
         newPurchase.setCustomer(customername);
         newPurchase.setDatetime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-        newPurchase.setState("entered");
+        newPurchase.setState("NULL");
         em.persist(newPurchase);
         em.flush();
 
@@ -98,6 +99,7 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
 
 
         PurchaseMessage.Lines lineMessage = new PurchaseMessage.Lines();
+        lineMessage.getLine();
 
         for (final Purchaseitem purchaseitem : basket) {
             PurchaseitemEntity newPurchaseitem = new PurchaseitemEntity();
@@ -110,8 +112,8 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
             plm.setMsDynNAVItemNo(purchaseitem.getProductByProduct().getDynnavnumber());
             plm.setDescription(purchaseitem.getProductByProduct().getDescription());
             plm.setTotalLinePrice( purchaseitem.getProductByProduct().getUnitprice().multiply(BigDecimal.valueOf(purchaseitem.getQuantity())).toString());
-            lineMessage.setLine(plm);
-            LogManager.getLogger(CheckoutServicesBean.class).error(plm);
+            lineMessage.addLine(plm);
+            LogManager.getLogger(CheckoutServicesBean.class).error(plm.getMsDynNAVItemNo());
 
             em.persist(newPurchaseitem);
             em.flush();
@@ -131,7 +133,7 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
         message.setTotalPrice(amount.toString());
         message.setPayId(newPurchase.getPayId());
         message.setPurchaseId(newPurchase.getId());
-
+        message.setLines(lineMessage);
 
         PurchaseMessage.Customer customerMessage = new PurchaseMessage.Customer();
 
@@ -144,6 +146,8 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
         customerMessage.setShopLoginname(customerE.getName());
         customerMessage.setAddress(customerE.getAddress());
         customerMessage.setDynNavCustNo(customerE.getDynNavCustNo());
+        customerMessage.setCity("Visp");
+        customerMessage.setPostCode("3930");
 
         message.setLines(lineMessage);
 
@@ -155,7 +159,7 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
         LogManager.getLogger(CheckoutServicesBean.class).error(customerE.toString());
 
         try {
-            sendJMSOurchaseMessage(message);
+            sendJMSOurchaseMessage(message, message.getPurchaseId());
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (JMSException e) {
@@ -213,7 +217,7 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
 
 
 
-         final Client client = ClientBuilder.newBuilder().newClient();
+        final Client client = ClientBuilder.newBuilder().newClient();
         final WebTarget target = client.target(URL);
         final Invocation.Builder builder = target.request();
         final Response result = builder.post(Entity.form(formData));
@@ -223,7 +227,7 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
         return xmlResponse.getPAYID().toString();
     }
 
-    void sendJMSOurchaseMessage(PurchaseMessage pmessage) throws JAXBException, JMSException {
+    void sendJMSOurchaseMessage(PurchaseMessage pmessage, String correlationId) throws JAXBException, JMSException {
         try {
             connection = webshopRemoteJmsQueueConnectionFactory.createConnection();
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -237,14 +241,16 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
             marshaller.marshal(pmessage, writer);
             final String purchaseMessageText = writer.toString();
 
-//...
+            LogManager.getLogger(CheckoutServicesBean.class).error(purchaseMessageText);
+
             final TextMessage textMessage = session.createTextMessage(purchaseMessageText);
-            String correlationId = UUID.randomUUID().toString();
+
+            saveCorrToDB(correlationId);
+
             textMessage.setJMSCorrelationID(correlationId);
-
-
             textMessage.setStringProperty("MessageFormat", "Version 1.5");
 
+            LogManager.getLogger(CheckoutServicesBean.class).error(textMessage);
             messageProducer.send(textMessage);
 
 
@@ -253,5 +259,8 @@ public class CheckoutServicesBean implements CheckoutServicesBeanLocal {
         }
 
 
+    }
+
+    private void saveCorrToDB(String correlationId) {
     }
 }

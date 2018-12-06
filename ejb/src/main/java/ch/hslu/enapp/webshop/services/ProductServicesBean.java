@@ -30,6 +30,7 @@ public class ProductServicesBean implements ProductServicesBeanLocal {
         productReturn.setDescription(productEntity.getDescription());
         productReturn.setMediapath(productEntity.getMediapath());
         productReturn.setUnitprice(productEntity.getUnitprice());
+        productReturn.setDynnavnumber(productEntity.getDynnavnumber());
         productReturn.setId(productEntity.getId());
 
 
@@ -48,7 +49,7 @@ public class ProductServicesBean implements ProductServicesBeanLocal {
             product.setMediapath(productEntity.getMediapath());
             product.setUnitprice(productEntity.getUnitprice());
             product.setId(productEntity.getId());
-
+            product.setDynnavnumber(productEntity.getDynnavnumber());
             productsReturn.add(product);
         }
 

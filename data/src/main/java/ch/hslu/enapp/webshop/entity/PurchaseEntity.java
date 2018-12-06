@@ -11,7 +11,9 @@ import java.util.UUID;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "getPurchaseByDate", query = "SELECT u FROM PurchaseEntity u ORDER BY u.datetime DESC"),
-        @NamedQuery(name = "getAllPurchases", query = "SELECT c FROM PurchaseEntity c WHERE c.customer = :customer")
+        @NamedQuery(name = "getAllPurchasesByCustomer", query = "SELECT c FROM PurchaseEntity c WHERE c.customer = :customer"),
+        @NamedQuery(name = "getAllPurchases", query = "SELECT c FROM PurchaseEntity c"),
+        @NamedQuery(name = "getAllPurchasesWhereStateNeedsUpdate", query = "SELECT c FROM PurchaseEntity c WHERE c.state <> '010' and c.state <> '000'")
 
 })
 
