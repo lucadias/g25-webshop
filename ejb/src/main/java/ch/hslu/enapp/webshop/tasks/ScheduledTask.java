@@ -29,11 +29,8 @@ public class ScheduledTask {
     private void scheduledTask() {
 
         final String baseURI = "http://enapp-daemons.el.eee.intern:9080/EnappDaemonWeb/rest/salesorder/corr/";
-
         List<PurchaseEntity> allPurchasesEntity = em.createNamedQuery("getAllPurchasesWhereStateNeedsUpdate", PurchaseEntity.class)
                 .getResultList();
-
-        allPurchasesEntity.forEach(purchaseEntity -> LogManager.getLogger(ScheduledTask.class).debug(purchaseEntity.getId()));
 
         allPurchasesEntity.forEach(purchaseEntity -> {
             final Client client = ClientBuilder.newBuilder().newClient();
@@ -43,9 +40,6 @@ public class ScheduledTask {
             addCostumerDynNumberToCustomer(result.getDynNAVCustomerNo(), purchaseEntity.getCustomer());
             purchaseEntity.setState((result.status));
         });
-
-
-
     }
 
     private void addCostumerDynNumberToCustomer(String dynNAVCustomerNo, String customer) {
