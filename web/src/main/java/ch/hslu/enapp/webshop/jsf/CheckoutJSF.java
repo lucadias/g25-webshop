@@ -25,7 +25,7 @@ public class CheckoutJSF {
 
     public void checkout(List<Purchaseitem> basket, String customername){
 
-        checkoutbean.checkout(basket, customername);
+        if(!basket.isEmpty()) checkoutbean.checkout(basket, customername);
 
     }
 

@@ -39,10 +39,9 @@ public class RegisterJSF implements Serializable {
     }
 
 
-    public String registerNewCustomer(){
+    public void registerNewCustomer(){
         registerbean.registerNewCustomer(customer);
-        return "/login?faces-redirect=true";
-
+        customer = new Customer();
     }
 
 

@@ -8,8 +8,41 @@
         <h1 style="margin-bottom: 2em;">Luca's music Webshop</h1>
         <h:form id="addToBasketForm">
 
+            <h1 style="margin-top:2em;margin-bottom: 1em;">Basket</h1>
+
+            <h:dataTable id="mp3_basket" var="basketMp3" value="#{basketJSF.basketitems}" style="text-align:left;width: 40em;">
+                <h:column>
+                    <!-- column header -->
+                    <f:facet name="header">Product</f:facet>
+                    <!-- row record -->
+                    #{basketMp3.productByProduct.name}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    #{basketMp3.productByProduct.description}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    #{basketMp3.productByProduct.unitprice} chf
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Quantity</f:facet>
+                    #{basketMp3.quantity}
+                </h:column>
+                <h:column>
+                    <h:commandButton actionListener="#{basketJSF.removefromBasket(basketMp3)}" value="Remove">
+                        <f:ajax execute="addToBasketForm" render="addToBasketForm mp3_basket"     />
+                    </h:commandButton>
+                </h:column>
 
 
+            </h:dataTable>
+
+
+            <h1 style="margin-top:2em;margin-bottom: 1em;">Songs:</h1>
         <h:dataTable id="mp3_table" var="singleMp3" value="#{productJSF.products}" style="text-align:left;width: 40em;">
             <h:column>
                 <!-- column header -->
@@ -34,38 +67,7 @@
             </h:column>
         </h:dataTable>
 
-        <h1 style="margin-top:2em;margin-bottom: 1em;">Basket</h1>
 
-        <h:dataTable id="mp3_basket" var="basketMp3" value="#{basketJSF.basketitems}" style="text-align:left;width: 40em;">
-            <h:column>
-                <!-- column header -->
-                <f:facet name="header">Product</f:facet>
-                <!-- row record -->
-                #{basketMp3.productByProduct.name}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Description</f:facet>
-                #{basketMp3.productByProduct.description}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Price</f:facet>
-                #{basketMp3.productByProduct.unitprice} chf
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Quantity</f:facet>
-                #{basketMp3.quantity}
-            </h:column>
-            <h:column>
-                <h:commandButton actionListener="#{basketJSF.removefromBasket(basketMp3)}" value="Remove">
-                    <f:ajax execute="addToBasketForm" render="addToBasketForm mp3_basket"     />
-                </h:commandButton>
-            </h:column>
-
-
-        </h:dataTable>
 
 
         </h:form>
